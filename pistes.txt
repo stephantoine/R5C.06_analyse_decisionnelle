@@ -1,0 +1,120 @@
+✅ 1. Pertinence du sujet (Exigence : choix pertinent + justification)
+
+✔ Thème décisionnel réel : sport, géopolitique, équité, allocation des médailles → thème riche et actuel
+✔ Jeu de données disponible : population, GDP, nombre de médailles par sport → parfait pour analyse
+✔ Problème décisionnel clair :
+
+“Quels sports olympiques sont les plus équitables dans la distribution des médailles, indépendamment de la richesse ou de la population des pays ?”
+Cela se traduit en décisions possibles :
+
+Où investir pour favoriser les pays émergents ?
+
+Quels sports sont plus “ouverts” et donc attractifs pour le CIO ?
+
+Quels sports favorisent excessivement les pays riches → besoin de réforme ?
+
+👉 C’est concret, mesurable, décidable.
+
+✅ 2. Préparation / nettoyage des données
+
+Tu peux facilement documenter ce que tu vas faire :
+
+vérifier doublons : chaque pays–sport ne doit apparaître qu’une fois
+
+gérer les valeurs manquantes (GDP, médailles 0, population manquante)
+
+normaliser GDP / population
+
+agréger par sport
+
+construire de nouveaux indicateurs (médianes, corrélation, Gini...)
+
+👉 Cela coche parfaitement la case “travail sérieux sur les données”.
+
+✅ 3. Modèle décisionnel (hors machine learning)
+
+Ton sujet s’y prête parfaitement, et tu peux utiliser des modèles mathématiques classiques très alignés avec le cahier des charges :
+
+👉 Modèles statistiques simples
+
+Corrélations Spearman entre médailles et richesse/population
+
+Régression linéaire simple (médaille en fonction de GDP ou population) → coefficients interprétables
+
+Tests statistiques éventuels (F-test simple)
+
+👉 Modèles probabilistes
+
+Distribution des médailles → loi multinomiale, entropie
+
+Indice de Gini sur les médailles
+
+Probabilités : “chance qu'un pays non–riche gagne dans ce sport”
+
+👉 Modèles décisionnels
+
+Tu peux formuler une vraie décision :
+
+“Quel sport maximiserait l’équité si on veut encourager la diversité des nations ?”
+
+Avec par exemple :
+
+un score d’équité composite pondéré
+
+une priorisation des sports selon une règle de décision
+(ex. maximiser Spearman faible + Gini faible + nombre de pays élevés)
+
+📌 Et tout ceci est 100% sans machine learning, donc respecte parfaitement l’exigence.
+
+✅ 4. Analyse et visualisation
+
+Ton sujet permet de faire d’excellents graphiques :
+
+Graphiques possibles (à forte valeur ajoutée) :
+
+nuage de points : médailles vs GDP (régression affichée)
+
+nuage de points : médailles vs population
+
+heatmap des corrélations par sport
+
+ranking des sports par indice d’équité
+
+distribution des médailles (histogramme, Gini plot)
+
+carte du monde colorée selon performance selon sport
+
+Ces visualisations soutiennent la prise de décision.
+Elles sont faciles à expliquer, donc adaptées à une présentation orale.
+
+✅ 5. Interprétation & prise de décision
+
+Ton sujet permet de donner des recommandations concrètes :
+
+Exemple :
+
+Si un sport a un Spearman très faible : c’est un sport accessible → à promouvoir
+
+Si un sport est monopolisé par 2–3 pays riches : sport très inéquitable → réfléchir à des quotas, un changement de format, une meilleure répartition
+
+La décision finale peut être :
+
+“Nous recommandons au CIO de promouvoir les sports X, Y et Z comme sports prioritaires pour accroître la diversité des nations médaillées.”
+
+Très clair, très présentable.
+
+🎯 Conclusion : oui, ton sujet est excellent, et même valorisant
+
+Tu vas pouvoir :
+
+traiter un vrai problème international et intéressant
+
+utiliser des modèles statistiques classiques (donc validé par la consigne)
+
+produire des visualisations riches
+
+proposer une vraie décision
+
+avoir un bon storytelling pour l’oral
+
+montrer une réflexion éthique (équité / diversité)
