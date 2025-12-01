@@ -74,3 +74,20 @@ plt.grid(True, which="both", linestyle="--", linewidth=0.5)
 plt.tight_layout()
 plt.show()
 
+
+
+
+# chaque discipline -> nb medaille chaque pays 
+
+# stats -> sur cette liste
+
+
+discipline = df_everything.groupby("Discipline").size().reset_index(name="MedalsCount")
+
+
+
+print(discipline)
+
+
+
+
