@@ -3,6 +3,10 @@ import matplotlib.pyplot as plt
 import os
 from scipy.stats import spearmanr
 import numpy as np
+from matplotlib.cm import ScalarMappable
+from matplotlib.colors import Normalize, Colormap
+from matplotlib.figure import Figure
+from matplotlib.axes import Axes
 
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
@@ -76,18 +80,62 @@ plt.show()
 
 
 
+disciplines = {}   # dict : {discipline -> {pays -> nb_médailles}}
 
-# chaque discipline -> nb medaille chaque pays 
+for _, row in df_everything.iterrows():
+    discipline = row["Discipline"]
+    country = row["Country"]
 
-# stats -> sur cette liste
+    if discipline not in disciplines:
+        disciplines[discipline] = {}
+
+    if country not in disciplines[discipline]:
+        disciplines[discipline][country] = 0
+
+    disciplines[discipline][country] += 1
+
+results = []   # liste de tuples (discipline, nb_pays, stdev)
+
+for discipline_name, data in disciplines.items():
+    medals = list(data.values())               # nombre de médailles par pays
+    nb_country = len(data.keys())             # nombre de pays
+    std = np.std(medals, dtype=float)         # écart-type
+    results.append((discipline_name, nb_country, std))
 
 
-discipline = df_everything.groupby("Discipline").size().reset_index(name="MedalsCount")
+for discipline, nb_country, std in results:
+    print(f"{discipline}\n\tNombre de pays : {nb_country}\n\tÉcart-type : {std}")
+
+print(f"{len(disciplines.keys())} disciplines analysées")
 
 
+disciplines_names = [r[0] for r in results]
+disciplines_country_count = [r[1] for r in results]
+disciplines_stdevs = [r[2] for r in results]
 
-print(discipline)
+max_nb = max(disciplines_country_count)
 
+cmap_name = "Blues"
+cmap: Colormap = plt.get_cmap(cmap_name)
+norm = Normalize(0, max_nb)
 
+colors = [cmap(norm(country_count)) for country_count in disciplines_country_count]
 
+fig: Figure
+ax: Axes
+fig, ax = plt.subplots(figsize=(16, 8), layout="constrained")
+
+fig.colorbar(
+    ScalarMappable(norm=norm, cmap=cmap_name),
+    ax=ax,
+    orientation="vertical",
+    label="Nombre de pays",
+)
+
+plt.bar(disciplines_names, disciplines_stdevs, color=colors)
+plt.xlabel("Disciplines")
+plt.xticks(rotation=90)
+plt.ylabel("Écarts-types")
+plt.title("Écart-type du nombre de médailles par pays pour chaque discipline")
+plt.show()
 

@@ -62,8 +62,8 @@ def plot_results(results: list[tuple[str, int, float]]) -> None:
 
     fig: Figure
     ax: Axes
-    fig, ax = plt.subplots(layout="constrained")
-
+    fig, ax = plt.subplots(figsize=(16, 8), layout="constrained")
+    
     fig.colorbar(
         ScalarMappable(norm=norm, cmap=cmap_name),
         ax=ax,
