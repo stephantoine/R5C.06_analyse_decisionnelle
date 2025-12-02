@@ -3,11 +3,13 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 from matplotlib.cm import get_cmap, ScalarMappable
-from matplotlib.colors import Normalize
+from matplotlib.colors import Normalize, Colormap
+from matplotlib.figure import Figure
+from matplotlib.axes import Axes
 
 
 def main() -> None:
-    df = pd.read_csv("everything.csv")
+    df: pd.DataFrame = pd.read_csv("everything.csv")
     disciplines: dict[str, dict[str, int]] = {}
     results: list[tuple[str, int, float]] = []
     for _, row in df.iterrows():
@@ -29,8 +31,8 @@ def decision(
     discipline: dict[str, int], discipline_name: str
 ) -> tuple[str, int, float]:
     medals: list[int] = [nb_medals for nb_medals in discipline.values()]
-    nb_country = len(discipline.keys())
-    std = np.std(medals, dtype=float)  # ecart type
+    nb_country: int = len(discipline.keys())
+    std: float = np.std(medals, dtype=float)  # ecart type
     return discipline_name, nb_country, std
 
 
@@ -50,14 +52,16 @@ def plot_results(results: list[tuple[str, int, float]]) -> None:
     max_nb: int = max(disciplines_country_count)
 
     cmap_name: str = "Blues"
-    cmap = get_cmap(cmap_name)
+    cmap: Colormap = get_cmap(cmap_name)
 
     norm: Normalize = Normalize(0, max_nb)
 
-    colors: list = [
+    colors: list[tuple[float, float, float, float]] = [
         cmap(norm(country_count)) for country_count in disciplines_country_count
     ]
 
+    fig: Figure
+    ax: Axes
     fig, ax = plt.subplots(layout="constrained")
 
     fig.colorbar(
