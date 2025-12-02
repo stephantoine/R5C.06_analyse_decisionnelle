@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from matplotlib.cm import get_cmap, ScalarMappable
+from matplotlib.cm import ScalarMappable
 from matplotlib.colors import Normalize, Colormap
 from matplotlib.figure import Figure
 from matplotlib.axes import Axes
@@ -52,7 +52,7 @@ def plot_results(results: list[tuple[str, int, float]]) -> None:
     max_nb: int = max(disciplines_country_count)
 
     cmap_name: str = "Blues"
-    cmap: Colormap = get_cmap(cmap_name)
+    cmap: Colormap = plt.get_cmap(cmap_name)
 
     norm: Normalize = Normalize(0, max_nb)
 
